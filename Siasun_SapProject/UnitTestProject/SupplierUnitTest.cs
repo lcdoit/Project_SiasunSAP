@@ -67,7 +67,10 @@ namespace UnitTestProject
             BaseOperation oper = ServiceFactory.createOperation("SAVE");//保存
             BaseOperation.formId = "BD_Supplier";//FormId
             string sapJson = "{\"header\": { 		\"msgid\": \"0000000000000126\", 		\"interid\": \"PS001\", 		\"datetime\": 20200107111452, 		\"sender\": \"SAP\", 		\"receiver\": \"ERP\" 	}, 	\"body\": { 		\"partner\": \"\", 		\"name_org\": \"\", 		\"taxnum\": \"\", 		\"bank\": { 			\"bkvid\": \"1\", 			\"banks\": \"2\", 			\"bankl\": \"3\", 			\"banka\": \"4\", 			\"zbankn\": \"5\", 			\"swift\": \"6\" 		}, 		\"lfb1\": { 			\"bukrs\": \"7\" 		} 	} }";
-            string targetJson =  DataTransfrom.getInstance().getTargetJsonStr(sapJson,new SupplierDataMapper());
+            SupplierDataMapper sd = new SupplierDataMapper();
+            Dictionary<string, object> mapper = sd.getMapper();
+            string targetJson =  DataTransfrom.getInstance().getTargetJsonStr(sapJson, mapper);
+        
             BaseOperation.targetJson = targetJson;
             oper.transform();//数据同步
         }
