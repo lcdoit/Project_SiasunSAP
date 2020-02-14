@@ -20,11 +20,11 @@ namespace GYIN.K3.SIASUN.SAP.INTERFACE
             //CHUtils.isCloudSSO(context);
             JObject jo = (JObject)JsonConvert.DeserializeObject(parameter);
             dynamic header = jo["header"]; 
-            string dbId, msgid = "0", interid = "0", sender = "", receiver = "";
+            string  msgid = "0", interid = "0", sender = "", receiver = "";
             try {
                 //如何获取当前服务器的URL
                 K3CloudApiClient client = new K3CloudApiClient(Constants.CLIENT_URL);
-                ParseHeader(header, out dbId, out msgid, out interid, out sender, out receiver);
+                ParseHeader(header, Constants.DBID, out msgid, out interid, out sender, out receiver);
                 bool bLogin = client.Login(Constants.DBID, Constants.USERNAME, Constants.PASSWORD, Constants.ICID);
                 if (!bLogin)
                     throw new Exception("登录失败");
@@ -73,14 +73,10 @@ namespace GYIN.K3.SIASUN.SAP.INTERFACE
             result.Add("header", jo);
             return result;
         }
-        public static void ParseHeader(dynamic header,out string dbid, out string msgid, out string interid, out string sender, out string receiver) {
+        public static void ParseHeader(dynamic header,string dbid, out string msgid, out string interid, out string sender, out string receiver) {
             if (header == null) 
                 throw new Exception("header 为空！");
-#if DEBUG
-            dbid = "5c55964802a991";
-#else
-            dbid = "5c55964802a991";
-#endif
+            dbid = header.dbid;
             msgid = header.msgid;
             interid = header.interid;
             sender = header.sender;
