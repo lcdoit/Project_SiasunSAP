@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace GYIN.K3.SIASUN.SAP.INTERFACE
 {
-    [Description("供应商数据交换接口类")]
-    public class SupplierPlugIn: IApiHandler
+    [Description("客户数据交换接口类")]
+    public class CustomerPlugIn : IApiHandler
     {
         public string saveStr = "";
         public string submitStr = "{\"CreateOrgId\":\"01\",\"Numbers\":[],\"Ids\":\"\"}";
         public string auditStr = "{\"CreateOrgId\":\"01\",\"Numbers\":[],\"Ids\":\"\"}";
-        public string FormId = "BD_Supplier";
+        public string FormId = "BD_Customer";
    
      //保存
         public bool save(K3CloudApiClient client, dynamic body)

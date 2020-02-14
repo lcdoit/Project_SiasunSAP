@@ -10,11 +10,14 @@ using System.Threading.Tasks;
 namespace GYIN.K3.SIASUN.SAP.BASESERVICE
 {
     [Description("所有接口的父类")]
-    public class BaseOperation
+    public class BaseOperation: OperateInter
     {
         public static string formId { get; set; }//FormId
         public static string targetJson { get; set; }//目标Json串
-
+        public string saveStr = "";
+        public string submitStr = "";
+        public string deleteStr = "";
+        public string AuditStr = "";
         //获取客户端对象 K3CloudApiClient
         public static ApiClient getClient()
         {
@@ -47,12 +50,30 @@ namespace GYIN.K3.SIASUN.SAP.BASESERVICE
             return getClient().Login("5dc8fa6c951bed", "scy", "666666", 2052);
         }
 
+        public string audit(string formId, string jsonData)
+        {
+            throw new NotImplementedException();
+        }
 
+        public string delete(string formId, string jsonData)
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual bool login()
         {
             bool flag = false;
             return flag;
+        }
+
+        public  string save(string formId, string jsonData)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string submit(string formId, string jsonData)
+        {
+            throw new NotImplementedException();
         }
 
         public virtual string transform()
